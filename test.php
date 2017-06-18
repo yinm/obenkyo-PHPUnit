@@ -1,34 +1,18 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-class StackTest extends TestCase
+class DependencyFailureTest extends TestCase
 {
-    public function testEmpty()
+    public function testOne()
     {
-        $stack = [];
-        $this->assertEmpty($stack);
-
-        return $stack;
+        $this->assertTrue(false);
     }
 
     /**
-     * @depends testEmpty
+     * @depends testOne
      */
-    public function testPush(array $stack)
+    public function testTwo()
     {
-        array_push($stack, 'foo');
-        $this->assertEquals('foo', $stack[count($stack) - 1]);
-        $this->assertNotEmpty($stack);
-
-        return $stack;
-    }
-
-    /**
-     * @depends testPush
-     */
-    public function testPop(array $stack)
-    {
-        $this->assertEquals('foo', array_pop($stack));
-        $this->assertEmpty($stack);
     }
 }
+
