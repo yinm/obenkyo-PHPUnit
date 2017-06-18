@@ -1,13 +1,13 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-class ExceptionTest extends TestCase
+class ExpectedErrorTest extends TestCase
 {
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException PHPUnit\Framework\Error\Warning
      */
-    public function testException()
+    public function testFailingInclude()
     {
+        include 'not_existing_file.php';
     }
 }
-
