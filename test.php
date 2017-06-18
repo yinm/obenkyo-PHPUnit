@@ -1,20 +1,35 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-require 'CsvFileIterator.php';
-
-class DataTest extends TestCase
+class DependencyAndDataProviderComboTest extends TestCase
 {
-    /**
-     * @dataProvider additionProvider
-     */
-    public function testAdd($a, $b, $expected)
+    public function provider()
     {
-        $this->assertEquals($expected, $a + $b);
+        return [['provider1'], ['provider2']];
     }
 
-    public function additionProvider()
+    public function testProducerFirst()
     {
-        return new CsvFileIterator('data.csv');
+        $this->assertTrue(true);
+        return 'first';
+    }
+
+    public function testProducerSecond()
+    {
+        $this->assertTrue(true);
+        return 'second';
+    }
+
+    /**
+     * @depends testProducerFirst
+     * @depends testProducerSecond
+     * @dataProvider provider
+     */
+    public function testConsumer()
+    {
+        $this->assertEquals(
+            ['provider1', 'first', 'second'],
+            func_get_args()
+        );
     }
 }
