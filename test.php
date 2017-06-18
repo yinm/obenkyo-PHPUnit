@@ -1,13 +1,17 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-class ExpectedErrorTest extends TestCase
+class OutputTest extends TestCase
 {
-    /**
-     * @expectedException PHPUnit\Framework\Error\Warning
-     */
-    public function testFailingInclude()
+    public function testExceptFooActualFoo()
     {
-        include 'not_existing_file.php';
+        $this->expectOutputString('foo');
+        print 'foo';
+    }
+
+    public function testExpectBarActualBaz()
+    {
+        $this->expectOutputString('bar');
+        print 'baz';
     }
 }
