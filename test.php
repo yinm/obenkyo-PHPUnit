@@ -1,18 +1,29 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-class DependencyFailureTest extends TestCase
+class MultipleDependenciesTest extends TestCase
 {
-    public function testOne()
+    public function testProducerFirst()
     {
-        $this->assertTrue(false);
+        $this->assertTrue(true);
+        return 'first';
+    }
+
+    public function testProducerSecond()
+    {
+        $this->assertTrue(true);
+        return 'second';
     }
 
     /**
-     * @depends testOne
+     * @depends testProducerFirst
+     * @depends testProducerSecond
      */
-    public function testTwo()
+    public function testConsumer()
     {
+        $this->assertEquals(
+            ['first', 'second'],
+            func_get_args()
+        );
     }
 }
-
