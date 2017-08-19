@@ -29,10 +29,10 @@ class DependencyAndDataProviderComboTest extends TestCase
      * @depends testProducerSecond
      * @dataProvider provider
      */
-    public function testConsumer()
+    public function testConsumer($expected)
     {
         $this->assertSame(
-            ['provider1', 'first', 'second'],
+            [$expected, 'first', 'second'],
             func_get_args()
         );
     }
