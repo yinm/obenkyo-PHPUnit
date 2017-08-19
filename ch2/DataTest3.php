@@ -17,6 +17,14 @@ class DataTest3 extends TestCase
     public function additionProvider()
     {
         $dirname = getcwd();
+
+        var_dump($dirname);
+        var_dump(__FILE__);
+        var_dump(dirname(__FILE__));
+        var_dump(basename(__FILE__));
+        var_dump(__DIR__);
+        echo ('-------------\n');
+
         return new CsvFileIterator($dirname . '/ch2/data.csv');
     }
 }
