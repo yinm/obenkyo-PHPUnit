@@ -2,25 +2,13 @@
 
 use PHPUnit\Framework\TestCase;
 
+require 'FileWriter.php';
+
 class ErrorSuppressionTest extends TestCase
 {
     public function testFileWriting()
     {
         $writer = new FileWriter;
-        $this->assertFalse($writer->write('/is-not-writable/file', 'stuff'));
-    }
-}
-
-class FileWriter
-{
-    public function write($file, $content)
-    {
-        $file = fopen($file, 'w');
-
-        if ($file == false) {
-            return false;
-        }
-
-        exit();
+        $this->assertFalse(@$writer->write('/is-not-writable/file', 'stuff'));
     }
 }
