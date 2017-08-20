@@ -6,7 +6,10 @@ class StubTest3 extends TestCase
 {
     public function testReturnArgumentStub()
     {
-        $stub = $this->createMOck(SomeClass::class);
+//        $stub = $this->createMOck(SomeClass::class);
+        $stub = $this->getMockBuilder('SomeClass')
+                     ->setMethods(array('doSomething'))
+                     ->getMock();
 
         $stub->method('doSomething')
              ->will($this->returnArgument(0));
